@@ -173,8 +173,15 @@ def run(
             # Stream results
             im0 = annotator.result()
             if view_img:
-                cv2.imshow(str(p), im0)
-                cv2.waitKey(1)  # 1 millisecond
+                cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN) 
+                #cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+                cv2.setWindowProperty("window", cv2.WND_PROP_TOPMOST, cv2.WINDOW_FULLSCREEN)
+                cv2.imshow("window", im0) 
+                if cv2.waitKey(1) == ord('q'):  # q to quit
+                    cv2.destroyAllWindows()
+                #cv2.waitKey(1)
+                #cv2.imshow(str(p), im0)
+                #cv2.waitKey(1)  # 1 millisecond
 
             # Save results (image with detections)
             if save_img:
